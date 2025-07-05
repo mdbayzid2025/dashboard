@@ -10,7 +10,7 @@ type LoginFormValues = {
 
 type OTPProps = GetProps<typeof Input.OTP>;
 
-const VerifyOTP = () => {
+const VerifyOTP = () => {  
   const navigate = useNavigate();
 
   const onFinish: FormProps<LoginFormValues>["onFinish"] = (values) => {
@@ -57,34 +57,11 @@ const VerifyOTP = () => {
             <h1 className="text-[24px] !font-bold text-[#222222] !pb-[24px]">
               Confirm Verification Code
             </h1>
-            <Form layout="vertical" onFinish={onFinish}>
-              {/* <Form.Item
-                label={
-                  <label
-                    htmlFor="Email"
-                    className="text-[#636363] text-lg font-bold"
-                  >
-                    Email
-                  </label>
-                }
-                name="email"
-                rules={[
-                  {
-                    type: "email",
-                    message: "The input is not valid E-mail!",
-                  },
-                  {
-                    required: true,
-                    message: "Please input your Email",
-                  },
-                ]}
-              >
-                <Input className="h-12 px-4" placeholder="tk@mymza.co.za" />
-              </Form.Item> */}
+            <Form layout="vertical" onFinish={onFinish}>             
               <Form.Item>
                 <Input.OTP
                   {...sharedProps}                  
-                  length={6} 
+                  length={5} 
                   size="large"
                 />
               </Form.Item>

@@ -8,9 +8,6 @@ import {
 } from "antd";
 import { useNavigate } from "react-router-dom";
 
-import type { GetProps } from 'antd';
-
-type OTPProps = GetProps<typeof Input.OTP>;
 
 type LoginFormValues = {
   email: string;
@@ -27,18 +24,7 @@ const ForgetPassword = () => {
   };
 
 
-  const onChange: OTPProps['onChange'] = (text) => {
-    console.log('onChange:', text);
-  };
-
-  const onInput: OTPProps['onInput'] = (value) => {
-    console.log('onInput:', value);
-  };
-
-  const sharedProps: OTPProps = {
-    onChange,
-    onInput,
-  };
+  
 
   return (
     <ConfigProvider
@@ -90,11 +76,7 @@ const ForgetPassword = () => {
               >
                 <Input className="h-12 px-4" placeholder="tk@mymza.co.za" />
               </Form.Item>
-              <Form.Item  name="otp" className="!w-full">                
-             <Input.OTP
-             className="!w-full"
-             formatter={(str) => str.toUpperCase()} {...sharedProps} />
-              </Form.Item>
+              
               <Form.Item>
                 <Button
                   // shape="round"

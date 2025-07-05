@@ -42,3 +42,14 @@
     margin-bottom: 15px !important;
 }
 
+.ant-otp-input-wrapper{
+  width: 100% !important;
+}
+.ant-otp-input{
+  width: 100% !important;
+  height: 60px !important;
+  font-size: 24px !important;
+}
+.ant-otp{
+  width: 100% !important;
+}

@@ -1,13 +1,6 @@
-import React from "react";
-import {
-  Button,
-  ConfigProvider,
-  Form,
-  Input,
-  Select,
-  type FormProps,
-} from "antd";
+import { Button, ConfigProvider, Form, Input, type FormProps } from "antd";
 import { useNavigate } from "react-router-dom";
+import type { GetProps } from "antd";
 
 type LoginFormValues = {
   email: string;
@@ -15,12 +8,27 @@ type LoginFormValues = {
   designation?: string;
 };
 
-const Login = () => {
+type OTPProps = GetProps<typeof Input.OTP>;
+
+const VerifyOTP = () => {
   const navigate = useNavigate();
 
   const onFinish: FormProps<LoginFormValues>["onFinish"] = (values) => {
     console.log("Received values of form: ", values);
     navigate("/");
+  };
+
+  const onChange: OTPProps["onChange"] = (text) => {
+    console.log("onChange:", text);
+  };
+
+  const onInput: OTPProps["onInput"] = (value) => {
+    console.log("onInput:", value);
+  };
+
+  const sharedProps: OTPProps = {
+    onChange,
+    onInput,
   };
 
   return (
@@ -39,18 +47,18 @@ const Login = () => {
       }}
     >
       <div className="flex items-center justify-center h-screen bg-white">
-        <div className="p-6 flex items-center gap-6">
+        <div className="p-6 flex items-center">
           <img
             src="/WestfertLogo.png"
             alt="Logo"
-            className="hidden md:block max-w-[550px] w-full"
+            className="hidden md:block max-w-[550px] w-full !mr-[90px]"
           />
           <div className="shadow-lg rounded-4 !p-12 w-full md:min-w-[550px] bg-white">
-            <h1 className="text-[24px] font-bold text-[#222222] pb-[24px]">
-              Sign Up
+            <h1 className="text-[24px] !font-bold text-[#222222] !pb-[24px]">
+              Confirm Verification Code
             </h1>
             <Form layout="vertical" onFinish={onFinish}>
-              <Form.Item
+              {/* <Form.Item
                 label={
                   <label
                     htmlFor="Email"
@@ -71,57 +79,28 @@ const Login = () => {
                   },
                 ]}
               >
-                <Input className="h-12 px-4" />
+                <Input className="h-12 px-4" placeholder="tk@mymza.co.za" />
+              </Form.Item> */}
+              <Form.Item>
+                <Input.OTP
+                  {...sharedProps}                  
+                  length={6} 
+                  size="large"
+                />
               </Form.Item>
-
-              <Form.Item
-                name="designation"
-                label="Designation Type"
-                initialValue="Admin /Manager"
-              >
-                <Select className="h-12">
-                  <Select.Option value="Admin /Manager">
-                    Admin/Manager
-                  </Select.Option>
-                  <Select.Option value="Sales Executive">
-                    Sales Executive
-                  </Select.Option>
-                  <Select.Option value="Others ">Others</Select.Option>
-                </Select>
-              </Form.Item>
-
-              <Form.Item
-                label={
-                  <label
-                    htmlFor="Password"
-                    className="text-[#636363] text-lg font-bold"
-                  >
-                    Password
-                  </label>
-                }
-                name="password"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your Password",
-                  },
-                ]}
-              >
-                <Input.Password className="h-12 px-4" placeholder="*********" />
-              </Form.Item>
-
               <Form.Item>
                 <Button
-                  shape="round"
+                  // shape="round"
                   type="primary"
                   htmlType="submit"
                   style={{
                     height: 48,
                     width: "100%",
                     fontWeight: 700,
+                    borderRadius: "16px",
                   }}
                 >
-                  Sign In
+                  Sent Code In
                 </Button>
               </Form.Item>
             </Form>
@@ -132,4 +111,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default VerifyOTP;

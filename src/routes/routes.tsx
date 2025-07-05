@@ -7,6 +7,7 @@ import Register from "../pages/register/Register";
 import Dashboard from "../pages/dashboard/Dashboard";
 import ForgetPassword from "../pages/authentication/ForgetPassword";
 import VerifyOTP from "../pages/authentication/VerifyOTP";
+import SetNewPassword from "../pages/authentication/SetNewPassword";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
   {path: "/forget-password", element: <ForgetPassword />,},
   {path: "/verify-otp", element: <VerifyOTP />,},
   {path: "/register", element: <Register />,},
+  {path: "/setnew-password", element: <SetNewPassword />,},
 ]);
 
 export default router;

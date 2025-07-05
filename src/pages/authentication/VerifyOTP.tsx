@@ -15,7 +15,7 @@ const VerifyOTP = () => {
 
   const onFinish: FormProps<LoginFormValues>["onFinish"] = (values) => {
     console.log("Received values of form: ", values);
-    navigate("/");
+    navigate("/setnew-password");
   };
 
   const onChange: OTPProps["onChange"] = (text) => {
@@ -77,7 +77,7 @@ const VerifyOTP = () => {
                     borderRadius: "16px",
                   }}
                 >
-                  Sent Code In
+                  Confirm Code
                 </Button>
               </Form.Item>
             </Form>

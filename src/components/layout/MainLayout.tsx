@@ -19,12 +19,12 @@ const MainLayout = () => {
       <Sidebar />
       <Layout>
         <HeaderDashboard />
-        <Content style={{ margin: 10 }} className="overflow-y-scroll">
+        <Content style={{ margin: 20 }} className="overflow-y-scroll">
           <div style={{
             padding: 0,
             minHeight: "50vh",
             width: "100%",
-            background: "#F6F6F6",
+            background: "#F1F1F9",
             borderRadius: borderRadiusLG,
           }} className="">
             <Outlet />

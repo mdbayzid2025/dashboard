@@ -40,7 +40,7 @@ const DashboardStates = () => {
                         <div className="w-14 h-14 bg-[#D2EBC5] rounded-full flex items-center justify-center">
                             {item.icon}
                         </div>
-                        <p className="!font-bold text-2xl text-black">{item.name}</p>
+                        <p className="font-medium text-2xl text-black">{item.name}</p>
                     </div>
                     <p className="text-[#999999] text-lg !mt-3">{item.date}</p>
                     <div className="flex items-center justify-between !mt-5">

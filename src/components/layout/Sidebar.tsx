@@ -102,8 +102,7 @@ const Sidebar = () => {
 
           <Button
             type="primary"
-            style={{
-              //   backgroundColor: "none",
+            style={{            
               border: "none",              
               marginTop: "auto",
               height: "45px",

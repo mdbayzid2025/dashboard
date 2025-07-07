@@ -58,10 +58,11 @@ const SoldFertiliser = () => {
           size="small"
           className="w-32 h-[40px]"
           onChange={handleChange}
-          defaultValue="year"
+          defaultValue="2022"
         >
-          <Option value="year">Year</Option>
-          <Option value="month">Month</Option>
+           <Option value="2022">2022</Option>
+          <Option value="2023">2023</Option>
+          <Option value="2024">2024</Option>
         </Select>
       </div>
 

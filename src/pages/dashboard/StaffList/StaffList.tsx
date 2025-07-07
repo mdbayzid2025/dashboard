@@ -1,148 +1,25 @@
-import { Button, Input, Space, Table, type TableProps } from 'antd';
+import { Button, Flex, Input, Space, Table, type TableProps } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import React, { useState } from 'react'
 import { ImInfo } from 'react-icons/im';
 import CustomModal from '../../../components/shared/CustomModal';
 import StaffDetailsModal from '../../../components/shared/StaffDetailsModal';
-import { FiPlus, FiSearch } from 'react-icons/fi';
+import { FiLock, FiPlus, FiSearch, FiUnlock } from 'react-icons/fi';
 import { TbMenu4 } from 'react-icons/tb';
+import { Link } from 'react-router-dom';
+import { staffData, type TStaffList } from '../../../data/StaffData';
 
-export type TStaffList = {
-    "key": string;
-    "name": string;
-    "email": string;
-    "companyName": string;
-    "designation": string;
-    "action": string;
-}
-const staffData: TStaffList[] = [
-    {
-        "key": "MM4178MRV2",
-        "name": "Admin Humphrey",
-        "email": "mr101@gmail.ru",
-        "companyName": "(+33)7 00 55 59 27",
-        "designation": "Sales executive",
-        "action": ""
-    },
-    {
-        "key": "AB4578DCD2",
-        "name": "Siphokazi Selebe",
-        "email": "mr101@gmail.ru",
-        "companyName": "(+33)7 00 55 59 27",
-        "designation": "Sales executive",
-        "action": ""
-    },
-    {
-        "key": "FF4578EDD4",
-        "name": "Alison Moloi",
-        "email": "mr101@gmail.ru",
-        "companyName": "(+33)7 00 55 59 27",
-        "designation": "Sales executive",
-        "action": ""
-    },
-    {
-        "key": "BB4578ED2",
-        "name": "Mr. Nadir",
-        "email": "xterris@gmail.com",
-        "companyName": "(+33)7 00 55 59 27",
-        "designation": "Manager",
-        "action": ""
-    },
-    {
-        "key": "FF4578EDD4",
-        "name": "Babalwa Moloi",
-        "email": "irnabela@gmail.com",
-        "companyName": "(+33)7 00 55 59 27",
-        "designation": "Manager",
-        "action": ""
-    },
-    {
-        "key": "FH4578ERV2",
-        "name": "Rashied Naidoo",
-        "email": "codence@gmail.com",
-        "companyName": "(+33)7 00 55 59 27",
-        "designation": "Manager",
-        "action": ""
-    },
-    {
-        "key": "CY6790FJF7",
-        "name": "Candice Ryan",
-        "email": "quasiah@gmail.com",
-        "companyName": "(+33)7 00 55 59 27",
-        "designation": "Manager",
-        "action": ""
-    },
-    {
-        "key": "MM4178MRV2",
-        "name": "Mark Russell",
-        "email": "xeno@yandex.ru",
-        "companyName": "(+33)7 00 55 59 27",
-        "designation": "Manager",
-        "action": ""
-    },
-    {
-        "key": "FH4578ERV2",
-        "name": "Sharief Isaacs",
-        "email": "redaniel@gmail.com",
-        "companyName": "(+33)7 00 55 59 27",
-        "designation": "Manager",
-        "action": ""
-    },
-    {
-        "key": "FF4578EDD4",
-        "name": "Asad ujjaman",
-        "email": "warn@mail.ru",
-        "companyName": "(+33)7 00 55 59 27",
-        "designation": "Sales executive",
-        "action": ""
-    },
-    {
-        "key": "FH4578ERV2",
-        "name": "Shameemah Salie",
-        "email": "joie@gmail.com",
-        "companyName": "(+33)7 00 55 59 27",
-        "designation": "Sales executive",
-        "action": ""
-    },
-    {
-        "key": "GM4134ER3C",
-        "name": "Shameemah Salie",
-        "email": "ziar@gmail.com",
-        "companyName": "(+33)7 00 55 59 27",
-        "designation": "Sales executive",
-        "action": ""
-    },
-    {
-        "key": "GM4134ER3C",
-        "name": "Shameemah Salie",
-        "email": "ahana@mail.ru",
-        "companyName": "(+33)7 00 55 59 27",
-        "designation": "Sales executive",
-        "action": ""
-    },
-    {
-        "key": "FH4578ERV2",
-        "name": "Shameemah Salie",
-        "email": "ahana@mail.ru",
-        "companyName": "(+33)7 00 55 59 27",
-        "designation": "Sales executive",
-        "action": ""
-    },
-    {
-        "key": "AB4578DCD2",
-        "name": "Shameemah Salie",
-        "email": "joie@gmail.com",
-        "companyName": "(+33)7 00 55 59 27",
-        "designation": "Sales executive",
-        "action": ""
-    }
-]
+
+
 
 
 
 const StaffList = () => {
     const [showBookingDetails, setShowBookingDetails] = useState(false);
-    const [showDetails, setShowDetails] = useState<TStaffList | null>(null)
+    const [showDetails, setShowDetails] = useState<TStaffList | null>(null);
+    const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+
+
     const columns: ColumnsType<any> = [
         { title: "Id. no.", dataIndex: "key", key: "key", },
         {
@@ -170,24 +47,70 @@ const StaffList = () => {
             key: "action",
             render: (_, record) => (
                 <div className='flex items-center gap-4'>
-                    <p onClick={() => { setShowDetails(record); setShowBookingDetails(true) }} className='cursor-pointer'> <ImInfo className='text-primary' size={20} /> </p>
+                    <p  className='cursor-pointer'> <Link to={`/${record?.designation ==="Manaager" ? "manager" : "employee"}-details/${record.key}`}><ImInfo className='text-primary' size={20} /></Link> </p>
+                    <p  onClick={() => { setShowDetails(record); setShowBookingDetails(true) }} className='cursor-pointer'><FiUnlock className='text-primary hover:text-red-600' size={20} /> </p>
                 </div>
             ),
         },
     ];
+
+    const rowSelection = {
+        selectedRowKeys,
+        onChange: (selectedKeys: any) => {
+            setSelectedRowKeys(selectedKeys);
+        },
+    };
+
+    const itemRender = (_, type, originalElement) => {
+        if (type === 'prev') {
+            return <a>〈 Previous</a>;
+        }
+        if (type === 'next') {
+            return <a>Next 〉</a>;
+        }
+        return originalElement;
+    };
+
     return (
         <div className='bg-white p-4 w-full shadow-lg rounded-lg'>
             <div className="flex items-center justify-between mb-5">
                 <h1 className='text-2xl font-semibold'>Employee List</h1>
                 <div className="flex items-center gap-5">
-                    
-                        {/* <Input style={{borderRadius: "50%"}} addonBefore={<p className='w-8 h-8 bg-[#D2EBC5] flex items-center justify-center rounded-full bg-primary'><FiSearch size={15}/></p> } size='large' className='!rounded-full' placeholder="large size"  />                                             */}
-                        <Input size='large' className='!rounded-full' placeholder="large size"  />                                            
+                    <FiLock size={24} className='text-[#A1A1A1]' />
+                    <FiUnlock size={24} className='text-[#A1A1A1]' />
+                    <div className="relative">
+                        <Input size='large' className='!rounded-full !pl-14' placeholder="large size" />
+                        <div className='w-8 h-8 bg-[#D2EBC5] flex items-center justify-center rounded-full'
+                            style={{
+                                position: 'absolute',
+                                top: '50%',
+                                left: '5px',
+                                transform: 'translateY(-50%)',
+                                zIndex: 1,
+                            }}>
+                            <FiSearch size={20} />
+                        </div>
+                    </div>
                     <Button shape="circle" size='large' icon={<TbMenu4 />} />
                     <Button type='primary' size='large' shape="round" icon={<FiPlus size={24} />} iconPosition="start">Add Member</Button>
                 </div>
             </div>
-            <Table columns={columns} dataSource={staffData} pagination={{ pageSize: 5 }} rowClassName="hover:bg-gray-100" />
+            {/* ------------Table ----------- */}
+            <Table style={{ fontSize: "12px !important" }} size='large' columns={columns}
+                rowSelection={{ type: 'checkbox', ...rowSelection, }}
+                dataSource={staffData}
+                pagination={{
+                    pageSize: 10,
+                    showSizeChanger: false,
+                    showTotal: (total, range) => (
+                        <span className="ant-pagination-total-text">
+                            Showing {range[0]}-{range[1]} of {total}
+                        </span>
+                    ),
+                    itemRender: itemRender,
+                }}              
+            />
+
             <CustomModal
                 open={showBookingDetails}
                 setOpen={setShowBookingDetails}

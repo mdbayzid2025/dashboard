@@ -1,14 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import ErrorPage from "../pages/error/ErrorPage";
-import Analytics from "../pages/analytics/Analytics";
-import Login from "../pages/authentication/Login";
-import Register from "../pages/register/Register";
-import Dashboard from "../pages/dashboard/dashboard/Dashboard";
 import ForgetPassword from "../pages/authentication/ForgetPassword";
-import VerifyOTP from "../pages/authentication/VerifyOTP";
+import Login from "../pages/authentication/Login";
 import SetNewPassword from "../pages/authentication/SetNewPassword";
+import VerifyOTP from "../pages/authentication/VerifyOTP";
+import Dashboard from "../pages/dashboard/dashboard/Dashboard";
+import ManagerDetails from "../pages/dashboard/StaffList/ManagerDetails";
 import StaffList from "../pages/dashboard/StaffList/StaffList";
+import ErrorPage from "../pages/error/ErrorPage";
+import Register from "../pages/register/Register";
+import EmpolyeeDetails from "../pages/dashboard/StaffList/EmpolyeeDetails";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,8 @@ const router = createBrowserRouter([
     children: [
       {path: "/", element: <Dashboard />,},    
       {path: "/staff-list", element: <StaffList />,},    
+      {path: "/manager-details/:id", element: <ManagerDetails />,},
+      {path: "/employee-details/:id", element: <EmpolyeeDetails />,},
     ],
   },
   {path: "/login", element: <Login />,},

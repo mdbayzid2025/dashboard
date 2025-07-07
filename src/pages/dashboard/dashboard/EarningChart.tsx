@@ -79,11 +79,11 @@ const EarningChart = () => {
           size="small"
           className='w-32 h-[40px]'
           onChange={handleChange}
-          defaultValue="jack"
+          defaultValue="2022"
         >
-          <Option value="jack">Jack</Option>
-          <Option value="yiminghe">Yiminghe</Option>
-          <Option value="lucy">Lucy</Option>
+          <Option value="2022">2022</Option>
+          <Option value="2023">2023</Option>
+          <Option value="2023">2023</Option>
         </Select>
       </div>
       <ResponsiveContainer width="100%" height={220}>

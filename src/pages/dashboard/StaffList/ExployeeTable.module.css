@@ -1,0 +1,5 @@
+/* MyTable.module.css */
+.customTable .ant-table-thead >tr>th {
+  background-color: #093952 !important; /* A custom light blue for this table */
+  color: #ffffff !important; /* White text for better contrast */
+}

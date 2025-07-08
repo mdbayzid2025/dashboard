@@ -75,3 +75,22 @@ body {
 .ant-pagination-total-text {
   margin-right: auto !important;
 }
+
+.workTable .ant-table-thead >tr>th {
+  background-color: #093952 !important; /* A custom light blue for this table */
+  color: #ffffff !important; /* White text for better contrast */
+}
+
+.workTable .ant-table-container table>thead>tr:first-child >*:first-child{
+  border-top-left-radius: 30px!important;
+}
+
+
+.workTable .ant-table-container table > thead > tr:last-child > *:last-child {
+  border-top-right-radius: 30px !important; /* Adjusted to specify the corner */
+  /* Use the specific border-radius property for clarity */
+}
+
+.hiddenScrollBar::-webkit-scrollbar {
+  display: none !important;
+}

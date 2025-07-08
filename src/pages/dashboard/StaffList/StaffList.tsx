@@ -1,23 +1,24 @@
-import { Button, Flex, Input, Space, Table, type TableProps } from 'antd';
+import { Button, Input, Modal, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import React, { useState } from 'react'
-import { ImInfo } from 'react-icons/im';
-import CustomModal from '../../../components/shared/CustomModal';
-import StaffDetailsModal from '../../../components/shared/StaffDetailsModal';
+import { useState } from 'react';
 import { FiLock, FiPlus, FiSearch, FiUnlock } from 'react-icons/fi';
+import { ImInfo } from 'react-icons/im';
 import { TbMenu4 } from 'react-icons/tb';
-import { Link } from 'react-router-dom';
-import { staffData, type TStaffList } from '../../../data/StaffData';
-
+import { staffData } from '../../../data/StaffData';
+import EmpolyeeDetails from './EmpolyeeDetails';
+import ManagerDetails from './ManagerDetails';
 
 
 
 
 
 const StaffList = () => {
-    const [showBookingDetails, setShowBookingDetails] = useState(false);
-    const [showDetails, setShowDetails] = useState<TStaffList | null>(null);
+
+    const [showDetails, setShowDetails] = useState<boolean>(false);
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+
+    const [showManagerDetails, setShowManagerDetails] = useState<boolean>(false);
+    const [showEmployeeDetails, setShowEmployeeDetails] = useState<boolean>(false);
 
 
     const columns: ColumnsType<any> = [
@@ -47,8 +48,17 @@ const StaffList = () => {
             key: "action",
             render: (_, record) => (
                 <div className='flex items-center gap-4'>
-                    <p  className='cursor-pointer'> <Link to={`/${record?.designation ==="Manaager" ? "manager" : "employee"}-details/${record.key}`}><ImInfo className='text-primary' size={20} /></Link> </p>
-                    <p  onClick={() => { setShowDetails(record); setShowBookingDetails(true) }} className='cursor-pointer'><FiUnlock className='text-primary hover:text-red-600' size={20} /> </p>
+                    <ImInfo
+                        onClick={() => {
+                            if (record?.designation === "Manager") {
+                                setShowManagerDetails(true);
+                            } else {
+                                setShowEmployeeDetails(true);
+                            }
+                            setShowDetails(true);
+                        }}
+                        className='text-primary cursor-pointer' size={20} />
+                    <p className='cursor-pointer'><FiUnlock className='text-primary hover:text-red-600' size={20} /> </p>
                 </div>
             ),
         },
@@ -61,7 +71,7 @@ const StaffList = () => {
         },
     };
 
-    const itemRender = (_, type, originalElement) => {
+    const itemRender = (_: any, type: any, originalElement: any) => {
         if (type === 'prev') {
             return <a>〈 Previous</a>;
         }
@@ -70,6 +80,8 @@ const StaffList = () => {
         }
         return originalElement;
     };
+
+    console.log('showManagerDetails', showManagerDetails);
 
     return (
         <div className='bg-white p-4 w-full shadow-lg rounded-lg'>
@@ -96,7 +108,7 @@ const StaffList = () => {
                 </div>
             </div>
             {/* ------------Table ----------- */}
-            <Table style={{ fontSize: "12px !important" }} size='large' columns={columns}
+            <Table size='large' columns={columns}
                 rowSelection={{ type: 'checkbox', ...rowSelection, }}
                 dataSource={staffData}
                 pagination={{
@@ -108,16 +120,43 @@ const StaffList = () => {
                         </span>
                     ),
                     itemRender: itemRender,
-                }}              
+                }}
             />
 
-            <CustomModal
-                open={showBookingDetails}
-                setOpen={setShowBookingDetails}
-                body={<StaffDetailsModal showDetails={showDetails} />}
-                key={'influencer-details'}
-                width={550}
-            />
+            {/* <Modal centered open={showDetails} onCancel={() => {
+                setShowDetails(false)
+                showManagerDetails ? setShowManagerDetails(false) : setShowEmployeeDetails(false)
+                }} footer={null} >
+                {showManagerDetails && <ManagerDetails /> }
+                {showEmployeeDetails && <EmpolyeeDetails />}
+            </Modal> */}
+            <Modal
+                centered
+                title={<p className='text-2xl text-[#222222]'>{showManagerDetails ? "Manager Details" : "Employee Details"}</p>}
+                className='staff-details-modal '
+                open={showDetails}
+                onCancel={() => {
+                    setShowDetails(false)
+                    showManagerDetails ? setShowManagerDetails(false) : setShowEmployeeDetails(false)
+                }}
+                footer={null}
+                width={1200}
+                height="80%"
+                styles={{
+                    content: {
+                        background: '#e3e3e3'
+                    },
+                    header: {
+                        background: '#e3e3e3'
+                    }
+                }}
+            >
+                <div className="hiddenScrollBar overflow-y-auto h-[70vh] ">
+                    {showManagerDetails && <ManagerDetails />}
+                    {showEmployeeDetails && <EmpolyeeDetails />}
+                </div>
+
+            </Modal>
         </div>
     )
 }
